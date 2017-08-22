@@ -1,7 +1,16 @@
-<Game>:
+<BG>:
+  size: self.size
+  pos: self.pos
   canvas:
     Color:
       rgba: 1,0,0,1
     Rectangle:
-      pos: 0,0
-      size: root.width,root.height
+      pos: self.pos
+      size: self.size
+
+<Game>:
+  bg: bg
+  BG:
+    id: bg
+    size: self.parent.proper_w,self.parent.proper_h
+    center: self.parent.center
