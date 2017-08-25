@@ -12,13 +12,26 @@
 <Grid>:
   size: self.size
   pos: self.pos
-  canvas:
+  canvas.before:
+    PushMatrix
+    Rotate:
+      angle: self.rotation
+      origin: self.center
     Color:
       rgba: 1,1,1,1
     Rectangle:
       pos: self.pos
       size: self.size
       source: self.src
+  canvas.after:
+    PopMatrix
+
+    Color:
+      rgba: 0,0,0,1
+    Rectangle:
+      pos: self.pos
+      size: self.size
+      source: self.overlay
 
 <Game>:
   bg: bg
