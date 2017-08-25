@@ -9,6 +9,17 @@
       size: self.size
       radius: [self.r,self.r,self.r,self.r]
 
+<Grid>:
+  size: self.size
+  pos: self.pos
+  canvas:
+    Color:
+      rgba: 1,1,1,1
+    Rectangle:
+      pos: self.pos
+      size: self.size
+      source: self.src
+
 <Game>:
   bg: bg
   BG:

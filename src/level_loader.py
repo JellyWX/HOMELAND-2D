@@ -6,14 +6,22 @@ class Level(object):
   def __init__(self,level):
     self.level = level
     self.name = level
-    self.aspect = (24,15)
+    self.size = (24,15)
 
-    try:
-      with open(LEVELS + level + '/data','r'):
-        for l in f:
-          l = l.strip()
-          if l.startswith('name='):
-            self.name = ' '.join(l.split('=').del(0))
+    with open(LEVELS + level + '/data','r'):
+      for l in f:
+        l = l.strip()
+        if l.startswith('name='):
+          name = l.split('=')
+          name.pop(0)
+          name = ' '.join(name)
 
-          elif l.startswith('size='):
-            self.aspect = tuple(' '.join(l.split('=').del(0)).split(','))
+          self.name = name
+
+        elif l.startswith('size='):
+          size = l.split('=')
+          size.pop(0)
+          size = ''.join(size)
+          size = size.split(',')
+
+          self.size = tuple(size)

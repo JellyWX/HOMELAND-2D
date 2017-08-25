@@ -4,6 +4,8 @@ from kivy.properties import ObjectProperty, NumericProperty
 from kivy.clock import Clock
 
 from locations import LEVELS
+from grid import Grid
+from level_loader import Level
 
 
 class BG(Widget):
@@ -19,12 +21,14 @@ class Game(Widget):
   ## game details ##
 
   started = 1
+  starting = 1
 
   waves = []
   towers = []
   monsters = []
   path = []
 
+  grid_size = (24,15)
 
   ## rendering stuff ##
 
@@ -37,10 +41,14 @@ class Game(Widget):
   def __init__(self,*args,**kwargs):
     super(Game,self).__init__(*args,**kwargs)
     Builder.load_file('game.kv') ## load the game's assigned layout file ##
+
     Clock.schedule_interval(self.update,1.0/20)
 
   def set_level(self,level): ## method for loading levels from files ##
-    pass
+    self.grid = [[Grid() for i in range(self.grid_size[1])] for i in range(self.grid_size[0])]
+    for row in self.grid:
+      for item in row:
+        self.add_widget(item)
 
   def update(self,t):
     if float(self.width) / self.height < self.aspect_x:
@@ -52,20 +60,23 @@ class Game(Widget):
       self.proper_h = self.height
 
     if self.started:
-      #self.sort_widgets()
+      if self.starting:
+
+        self.starting = False
+
       self.size_widgets()
-
-  def sort_widgets(self): ## method to make sure objects render in the correct order ##
-    children_sorted = sorted(self.children,key=lambda w: w.y)
-    children_sorted.reverse()
-
-    if children_sorted != self.children:
-      for i in children_sorted:
-        if not 'NO_SORT' in i.tags:
-          self.remove_widget(i)
-          self.add_widget(i)
 
   def size_widgets(self):
     self.bg.size = self.proper_w,self.proper_h
     self.bg.center = self.center
     self.bg.r = self.proper_h * 1 / 100
+
+    xpos = 0
+    for row in self.grid:
+      ypos = 0
+      for item in row:
+        item.x = self.bg.x + float(self.bg.width)/self.grid_size[0] * xpos
+        item.y = self.bg.y + float(self.bg.height)/self.grid_size[1] * ypos
+        item.size = float(self.bg.width)/self.grid_size[0],float(self.bg.width)/self.grid_size[0]
+        ypos += 1
+      xpos += 1

@@ -1,4 +1,6 @@
 from kivy.uix.screenmanager import ScreenManager
+from kivy.properties import ObjectProperty
+
 
 class Manager(ScreenManager):
-  pass
+  game = ObjectProperty(None)
