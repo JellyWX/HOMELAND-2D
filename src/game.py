@@ -1,11 +1,13 @@
 from kivy.uix.widget import Widget
 from kivy.lang.builder import Builder
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, NumericProperty
 from kivy.clock import Clock
+
+from locations import LEVELS
 
 
 class BG(Widget):
-  pass
+  r = NumericProperty(0.15)
 
 
 class Game(Widget):
@@ -26,11 +28,11 @@ class Game(Widget):
 
   ## rendering stuff ##
 
-  aspect_x = 16.0/9
-  aspect_y = 9.0/16
+  aspect_x = 16.0/10
+  aspect_y = 10.0/16
 
-  proper_w = 16
-  proper_h = 9
+  proper_w = 24
+  proper_h = 15
 
   def __init__(self,*args,**kwargs):
     super(Game,self).__init__(*args,**kwargs)
@@ -43,14 +45,14 @@ class Game(Widget):
   def update(self,t):
     if float(self.width) / self.height < self.aspect_x:
       self.proper_w = self.width
-      self.proper_h = self.width * self.aspect_y ## TODO make proper height and width match a good aspect ratio
+      self.proper_h = self.width * self.aspect_y
 
     elif float(self.width) / self.height > self.aspect_x:
       self.proper_w = self.height * self.aspect_x
-      self.proper_h = self.height ## TODO make proper height and width match a good aspect ratio
+      self.proper_h = self.height
 
     if self.started:
-      self.sort_widgets()
+      #self.sort_widgets()
       self.size_widgets()
 
   def sort_widgets(self): ## method to make sure objects render in the correct order ##
@@ -59,9 +61,11 @@ class Game(Widget):
 
     if children_sorted != self.children:
       for i in children_sorted:
-        self.remove_widget(i)
-        self.add_widget(i)
+        if not 'NO_SORT' in i.tags:
+          self.remove_widget(i)
+          self.add_widget(i)
 
   def size_widgets(self):
     self.bg.size = self.proper_w,self.proper_h
     self.bg.center = self.center
+    self.bg.r = self.proper_h * 1 / 100
