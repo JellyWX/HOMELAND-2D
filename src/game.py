@@ -45,7 +45,12 @@ class Game(Widget):
     Clock.schedule_interval(self.update,1.0/20)
 
   def set_level(self,level): ## method for loading levels from files ##
-    self.grid = [[Grid() for i in range(self.grid_size[1])] for i in range(self.grid_size[0])]
+    self.level = Level(level)
+    self.grid_size = self.level.size
+    self.aspect_x = self.grid_size[0]/self.grid_size[1]
+    self.aspect_y = self.grid_size[1]/self.grid_size[0]
+
+    self.grid = [[Grid() for i in range(int(self.grid_size[1]))] for i in range(int(self.grid_size[0]))]
     for row in self.grid:
       for item in row:
         self.add_widget(item)
@@ -75,8 +80,8 @@ class Game(Widget):
     for row in self.grid:
       ypos = 0
       for item in row:
-        item.x = self.bg.x + float(self.bg.width)/self.grid_size[0] * xpos
-        item.y = self.bg.y + float(self.bg.height)/self.grid_size[1] * ypos
-        item.size = float(self.bg.width)/self.grid_size[0],float(self.bg.width)/self.grid_size[0]
+        item.x = self.bg.x + self.bg.width/self.grid_size[0] * xpos
+        item.y = self.bg.y + self.bg.height/self.grid_size[1] * ypos
+        item.size = self.bg.width/self.grid_size[0],self.bg.height/self.grid_size[1]
         ypos += 1
       xpos += 1

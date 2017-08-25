@@ -6,7 +6,7 @@ from screenmanager import Manager
 class Main(App):
 
   def on_start(self):
-    self.manager.game.set_level('')
+    self.manager.game.set_level('level_01')
 
   def build(self):
     self.manager = Manager()

@@ -8,7 +8,7 @@ class Level(object):
     self.name = level
     self.size = (24,15)
 
-    with open(LEVELS + level + '/data','r'):
+    with open(LEVELS + level + '/data','r') as f:
       for l in f:
         l = l.strip()
         if l.startswith('name='):
@@ -23,5 +23,7 @@ class Level(object):
           size.pop(0)
           size = ''.join(size)
           size = size.split(',')
+
+          size = map(float,size)
 
           self.size = tuple(size)
