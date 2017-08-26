@@ -21,7 +21,6 @@ class Game(Widget):
   ## game details ##
 
   started = 1
-  starting = 1
 
   waves = []
   towers = []
@@ -37,6 +36,10 @@ class Game(Widget):
 
   proper_w = 24
   proper_h = 15
+
+  ## useful things ##
+
+  mouse_pos = (0,0)
 
   def __init__(self,*args,**kwargs):
     super(Game,self).__init__(*args,**kwargs)
@@ -55,6 +58,9 @@ class Game(Widget):
       for item in row:
         self.add_widget(item)
 
+  def catch_mouse(self,etype,pos):
+    self.mouse_pos = pos
+
   def update(self,t):
     if float(self.width) / self.height < self.aspect_x:
       self.proper_w = self.width
@@ -65,9 +71,6 @@ class Game(Widget):
       self.proper_h = self.height
 
     if self.started:
-      if self.starting:
-
-        self.starting = False
 
       self.size_widgets()
 
@@ -83,5 +86,11 @@ class Game(Widget):
         item.x = self.bg.x + self.bg.width/self.grid_size[0] * xpos
         item.y = self.bg.y + self.bg.height/self.grid_size[1] * ypos
         item.size = self.bg.width/self.grid_size[0],self.bg.height/self.grid_size[1]
+
+        if item.collide_point(self.mouse_pos[0],self.mouse_pos[1]):
+          item.overlay_col = [1,0,0,1]
+        else:
+          item.overlay_col = [0,0,0,1]
+
         ypos += 1
       xpos += 1
