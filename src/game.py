@@ -42,6 +42,8 @@ class Game(Widget):
   mouse_pos = (0,0)
   mouse_state = 'up'
 
+  selection_state = False
+
   def __init__(self,*args,**kwargs):
     super(Game,self).__init__(*args,**kwargs)
     Builder.load_file('game.kv') ## load the game's assigned layout file ##
@@ -64,6 +66,7 @@ class Game(Widget):
 
   def on_touch_down(self,mouse):
     self.mouse_state = 'down'
+    self.selection_state = not self.selection_state
 
   def on_touch_up(self,mouse):
     self.mouse_state = 'up'
@@ -96,16 +99,17 @@ class Game(Widget):
         item.y = self.bg.y + self.bg.height/self.grid_size[1] * ypos
         item.size = self.bg.width/self.grid_size[0],self.bg.height/self.grid_size[1]
 
-        if not set_overlay and item.collide_point(self.mouse_pos[0],self.mouse_pos[1]):
-          if self.mouse_state == 'down':
-            item.overlay_col = [0,0,1,1]
-            set_overlay = 1
-          else:
+        if not self.selection_state:
+          if not set_overlay and item.collide_point(self.mouse_pos[0],self.mouse_pos[1]):
             item.overlay_col = [1,0,0,1]
             set_overlay = 1
+            self.selected_cell = item
+
+          else:
+            item.overlay_col = [0,0,0,1]
 
         else:
-          item.overlay_col = [0,0,0,1]
+          self.selected_cell.overlay_col = [0,0,1,1]
 
         ypos += 1
       xpos += 1
