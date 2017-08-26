@@ -45,7 +45,7 @@ class Game(Widget):
     super(Game,self).__init__(*args,**kwargs)
     Builder.load_file('game.kv') ## load the game's assigned layout file ##
 
-    Clock.schedule_interval(self.update,1.0/20)
+    Clock.schedule_interval(self.update,1.0/60)
 
   def set_level(self,level): ## method for loading levels from files ##
     self.level = Level(level)
@@ -75,6 +75,8 @@ class Game(Widget):
       self.size_widgets()
 
   def size_widgets(self):
+    set_overlay = 0
+
     self.bg.size = self.proper_w,self.proper_h
     self.bg.center = self.center
     self.bg.r = self.proper_h * 1 / 100
@@ -87,8 +89,9 @@ class Game(Widget):
         item.y = self.bg.y + self.bg.height/self.grid_size[1] * ypos
         item.size = self.bg.width/self.grid_size[0],self.bg.height/self.grid_size[1]
 
-        if item.collide_point(self.mouse_pos[0],self.mouse_pos[1]):
+        if not set_overlay and item.collide_point(self.mouse_pos[0],self.mouse_pos[1]):
           item.overlay_col = [1,0,0,1]
+          set_overlay = 1
         else:
           item.overlay_col = [0,0,0,1]
 
