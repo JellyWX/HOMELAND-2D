@@ -40,6 +40,7 @@ class Game(Widget):
   ## useful things ##
 
   mouse_pos = (0,0)
+  mouse_state = 'up'
 
   def __init__(self,*args,**kwargs):
     super(Game,self).__init__(*args,**kwargs)
@@ -60,6 +61,12 @@ class Game(Widget):
 
   def catch_mouse(self,etype,pos):
     self.mouse_pos = pos
+
+  def on_touch_down(self,mouse):
+    self.mouse_state = 'down'
+
+  def on_touch_up(self,mouse):
+    self.mouse_state = 'up'
 
   def update(self,t):
     if float(self.width) / self.height < self.aspect_x:
@@ -90,8 +97,13 @@ class Game(Widget):
         item.size = self.bg.width/self.grid_size[0],self.bg.height/self.grid_size[1]
 
         if not set_overlay and item.collide_point(self.mouse_pos[0],self.mouse_pos[1]):
-          item.overlay_col = [1,0,0,1]
-          set_overlay = 1
+          if self.mouse_state == 'down':
+            item.overlay_col = [0,0,1,1]
+            set_overlay = 1
+          else:
+            item.overlay_col = [1,0,0,1]
+            set_overlay = 1
+
         else:
           item.overlay_col = [0,0,0,1]
 
