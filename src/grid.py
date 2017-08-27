@@ -17,18 +17,32 @@ class Grid(Widget):
   overlay = Str(ASSETS + 'Grid/overlay.png')
   overlay_col = Li([0,0,0,1])
 
-  def __init__(self,buildable=True,travellable=True,*args,**kwargs):
+  def __init__(self,access='0',*args,**kwargs):
     super(Grid,self).__init__(*args,**kwargs)
     self.rotation = choice((0,90,180))
 
-    self.buildable = buildable
-    self.travellable = travellable
+    self.access = access
 
-    if self.buildable:
+    if self.access in ['0','2']:
       self.overlay = ASSETS + 'Grid/overlay.png'
-      self.src = ASSETS + 'Grid/RustyPanel1.png'
     else:
       self.overlay = ASSETS + 'placeholder/invisible.png'
 
-    if not (self.buildable and self.travellable):
+    if self.access == '0':
+      self.src = ASSETS + 'Grid/RustyPanel1.png'
+      self.buildable = True
+      self.travellable = True
+
+    elif self.access == '1':
+      self.src = ASSETS + 'Grid/RustyGrid1.png'
+      self.buildable = False
+      self.travellable = True
+
+    elif self.access == '2':
+      self.buildable = True
+      self.travellable = False
+
+    elif self.access == '3':
       self.src = ASSETS + 'Grid/hole.png'
+      self.buildable = False
+      self.travellable = False
