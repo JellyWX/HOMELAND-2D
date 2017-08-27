@@ -13,7 +13,7 @@ class Grid(Widget):
 
   rotation = Num(choice((0,90,180)))
 
-  src = Str(ASSETS + 'Grid/RustyPanel1.png')
+  src = Str(ASSETS + 'Grid/Grid.png')
   overlay = Str(ASSETS + 'Grid/overlay.png')
   overlay_col = Li([0,0,0,1])
 
@@ -25,6 +25,10 @@ class Grid(Widget):
     self.travellable = travellable
 
     if self.buildable:
-      overlay = ASSETS + 'Grid/overlay.png'
+      self.overlay = ASSETS + 'Grid/overlay.png'
+      self.src = ASSETS + 'Grid/RustyPanel1.png'
     else:
-      overlay = ASSETS + 'placeholder/invisible.png'
+      self.overlay = ASSETS + 'placeholder/invisible.png'
+
+    if not (self.buildable and self.travellable):
+      self.src = ASSETS + 'Grid/hole.png'

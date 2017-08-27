@@ -27,7 +27,7 @@ class Game(Widget):
   monsters = []
   path = []
 
-  grid_size = (24,15)
+  grid_size = (24.0,15.0)
 
   ## rendering stuff ##
 
@@ -52,11 +52,12 @@ class Game(Widget):
 
   def set_level(self,level): ## method for loading levels from files ##
     self.level = Level(level)
+
     self.grid_size = self.level.size
     self.aspect_x = self.grid_size[0]/self.grid_size[1]
     self.aspect_y = self.grid_size[1]/self.grid_size[0]
 
-    self.grid = [[Grid() for i in range(int(self.grid_size[1]))] for i in range(int(self.grid_size[0]))]
+    self.grid = self.level.map
     for row in self.grid:
       for item in row:
         self.add_widget(item)
