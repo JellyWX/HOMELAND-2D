@@ -50,7 +50,6 @@ class Level(object):
           elif item in ['1', 't']:
             self.map[rown].append(Grid(access='1'))
             #self.map[rown].append(1)
-            print('ok')
 
           elif item in ['2', 'b']:
             self.map[rown].append(Grid(access='2'))
