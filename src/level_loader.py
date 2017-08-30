@@ -43,28 +43,9 @@ class Level(object):
 
         row = l.split(',')
         for item in row:
-          if item in ['0', 'all', 'bt']:
-            self.map[rown].append(Grid())
-            #self.map[rown].append(0)
-
-          elif item in ['1', 't']:
-            self.map[rown].append(Grid(access=1))
-            #self.map[rown].append(1)
-
-          elif item in ['2', 'b']:
-            self.map[rown].append(Grid(access=2))
-            #self.map[rown].append(2)
-
-          elif item in ['3', 'n', 'none']:
-            self.map[rown].append(Grid(access=3))
-            #self.map[rown].append(3)
-
-          elif item in ['4', 'en']:
-            self.map[rown].append(Grid(access=4))
-
-          elif item in ['5', 'ex']:
-            self.map[rown].append(Grid(access=5))
-
+          if item in [str(i) for i in range(6)]:
+            self.map[rown].append(Grid(access=int(item)))
+            
           else:
             print('WARN: Did not expect character \'' + str(item) + '\' in map declaration.')
 
