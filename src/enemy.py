@@ -1,4 +1,5 @@
 from kivy.uix.widget import Widget
+from kivy.properties import StringProperty as Str
 
 from locations import ASSETS
 
@@ -6,26 +7,21 @@ from locations import ASSETS
 class Enemy(Widget):
 
   name = 'DEFAULT'
-  map = []
+  grid = []
   routes = []
   route = []
 
   src = Str(ASSETS + 'enemy/' + name + '.png')
 
-  def __init__(self,name,map,*args,**kwargs):
+  def __init__(self,name,grid,*args,**kwargs):
     super(Enemy,self).__init__(*args,**kwargs)
     self.name = name
 
     self.src = ASSETS + 'enemy/' + self.name + '.png'
-    self.map = map
+    self.grid = grid
 
-  def route(self):
+  def getRoute(self):
     self.routes = [[0,0]]
-    while not _checkRoutesValidity():
-      _getRoutes()
-
-    self.route = _checkRoutesValidity()
-
     def _getRoutes():
       new_routes = []
       for route in self.routes:
@@ -36,7 +32,7 @@ class Enemy(Widget):
             if index < 0:
               continue ## if the index causes a skip across the side of the array, ignore it and skip over
           try:
-            if self.map[new_loc[0]][new_loc[1]].travellable:
+            if self.grid[new_loc[0]][new_loc[1]].travellable:
               r.append(new_loc)
               new_routes.append(r)
           except IndexError:
@@ -45,8 +41,15 @@ class Enemy(Widget):
 
     def _checkRoutesValidity():
       for route in self.routes:
-        if route[-1].access == 5:
+        if self.grid[route[-1][0]][route[-1][1]].access == 5:
           return route
           break
       else:
         return None
+
+    while not _checkRoutesValidity():
+      _getRoutes()
+
+    self.route = _checkRoutesValidity()
+    for i,j in self.route:
+      self.map[i][j].overlay_col = [0,1,0,1]

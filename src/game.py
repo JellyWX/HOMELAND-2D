@@ -6,6 +6,7 @@ from kivy.clock import Clock
 from locations import LEVELS
 from grid import Grid
 from level_loader import Level
+from enemy import Enemy
 
 
 class BG(Widget):
@@ -62,6 +63,8 @@ class Game(Widget):
       for item in row:
         self.add_widget(item)
 
+    self.enemy = Enemy('DEFAULT',self.grid)
+
   def catch_mouse(self,etype,pos):
     self.mouse_pos = pos
 
@@ -82,7 +85,7 @@ class Game(Widget):
       self.proper_h = self.height
 
     if self.started:
-
+      self.enemy.getRoute()
       self.size_widgets()
 
   def size_widgets(self):

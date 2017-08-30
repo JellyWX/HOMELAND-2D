@@ -34,12 +34,13 @@ class Grid(Widget):
       self.buildable = True
       self.travellable = True
 
-    elif self.access in [1,4,5]: 
+    elif self.access in [1, 4, 5]:
       self.buildable = False
       self.travellable = True
-      
+
       if self.access == 1:
         self.src = ASSETS + 'Grid/RustyGrid1.png'
+
       elif self.access == 4:
         self.src = ASSETS + 'Grid/Entry.png'
 
@@ -54,4 +55,3 @@ class Grid(Widget):
       self.buildable = False
       self.travellable = False
       self.src = ASSETS + 'Grid/hole.png'
-
