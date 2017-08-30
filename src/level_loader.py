@@ -9,6 +9,8 @@ class Level(object):
     self.name = level
     self.size = (16,10)
     self.map = []
+    self.entry = []
+    self.exit = []
 
     with open(LEVELS + level + '/data','r') as f:
       for l in f:
@@ -45,9 +47,10 @@ class Level(object):
         for item in row:
           if item in [str(i) for i in range(6)]:
             self.map[rown].append(Grid(access=int(item)))
-            
+
           else:
             print('WARN: Did not expect character \'' + str(item) + '\' in map declaration.')
+            self.map[rown].append(Grid())
 
         rown += 1
 
