@@ -7,6 +7,8 @@ class Enemy(Widget):
 
   name = 'DEFAULT'
   map = []
+  routes = []
+  route = []
 
   src = Str(ASSETS + 'enemy/' + name + '.png')
 
@@ -18,9 +20,11 @@ class Enemy(Widget):
     self.map = map
 
   def route(self):
-    self.routes = []
+    self.routes = [[0,0]]
     while not _checkRoutesValidity():
       _getRoutes()
+
+    self.route = _checkRoutesValidity()
 
     def _getRoutes():
       new_routes = []
