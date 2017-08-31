@@ -56,3 +56,15 @@ class Level(object):
 
       self.size = float(len(self.map)), float(len(self.map[0]))
       print(self.size)
+
+  def getExit(self):
+    for row in range(len(self.map)):
+      for col in range(len(self.map[row])):
+        if self.map[row][col].access == 5:
+          return row,col
+
+  def getEntry(self):
+    for row in range(len(self.map)):
+      for col in range(len(self.map[row])):
+        if self.map[row][col].access == 4:
+          return row,col

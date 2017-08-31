@@ -17,6 +17,8 @@ class Grid(Widget):
   overlay = Str(ASSETS + 'Grid/overlay.png')
   overlay_col = Li([0,0,0,1])
 
+  shade = Li([1,1,1,1])
+
   def __init__(self,access=0,*args,**kwargs):
     super(Grid,self).__init__(*args,**kwargs)
     self.rotation = choice((0,90,180))

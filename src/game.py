@@ -63,7 +63,7 @@ class Game(Widget):
       for item in row:
         self.add_widget(item)
 
-    self.enemy = Enemy('DEFAULT',self.grid)
+    self.enemy = Enemy('DEFAULT',self.level)
 
   def catch_mouse(self,etype,pos):
     self.mouse_pos = pos
