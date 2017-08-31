@@ -7,7 +7,7 @@ from screenmanager import Manager
 class Main(App):
 
   def on_start(self):
-    self.manager.game.set_level('level_01')
+    self.manager.game.set_level('level_02')
     Window.bind(mouse_pos=self.manager.game.catch_mouse)
 
   def build(self):
