@@ -7,6 +7,7 @@ from locations import LEVELS
 from grid import Grid
 from level_loader import Level
 from enemy import Enemy
+from tower import *
 
 
 class BG(Widget):
@@ -26,7 +27,6 @@ class Game(Widget):
   waves = []
   towers = []
   monsters = []
-  path = []
 
   grid_size = (24.0,15.0)
 
@@ -63,6 +63,7 @@ class Game(Widget):
       for item in row:
         self.add_widget(item)
 
+    self.towers = [[None for _ in range(int(self.grid_size[0]))] for _ in range(int(self.grid_size[1]))]
     self.enemy = Enemy('DEFAULT',self.level)
 
   def catch_mouse(self,etype,pos):
@@ -114,6 +115,16 @@ class Game(Widget):
 
         else:
           self.selected_cell.overlay_col = [0,0,1,1]
+
+        ypos += 1
+      xpos += 1
+
+    xpos = 0
+    for row in self.towers:
+      ypos = 0
+      for item in row:
+        if not item:
+          pass ## do things ##
 
         ypos += 1
       xpos += 1

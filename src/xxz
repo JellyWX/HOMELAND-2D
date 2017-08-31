@@ -1,0 +1,10 @@
+Help on NoneType object:
+
+class NNoonneeTTyyppee(object)
+ |  Methods defined here:
+ |  
+ |  ____hhaasshh____(...)
+ |      x.__hash__() <==> hash(x)
+ |  
+ |  ____rreepprr____(...)
+ |      x.__repr__() <==> repr(x)
