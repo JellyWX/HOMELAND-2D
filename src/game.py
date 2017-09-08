@@ -44,6 +44,7 @@ class Game(Widget):
   mouse_state = 'up'
 
   selection_state = False
+  clicked_cell = False
 
   def __init__(self,*args,**kwargs):
     super(Game,self).__init__(*args,**kwargs)
@@ -105,16 +106,25 @@ class Game(Widget):
         item.size = self.bg.width/self.grid_size[0],self.bg.height/self.grid_size[1]
 
         if not self.selection_state:
+
           if not set_overlay and item.collide_point(self.mouse_pos[0],self.mouse_pos[1]):
-            item.overlay_col = [1,0,0,1]
-            set_overlay = 1
+            if self.clicked_cell: ## if this is the first cell covered when the user presses the mouse out of selected mode:
+
+              if self.selected_cell == item:
+                print('now you should build a tower before you lose your fucking mind')
+
+              self.clicked_cell = False
+
+            item.overlay_col = [1,0,0,1] ## sets to red (hover)
+            set_overlay = 1 ## confirms that only one cell can be selected at once
             self.selected_cell = item
 
           else:
             item.overlay_col = [0,0,0,1]
 
         else:
-          self.selected_cell.overlay_col = [0,0,1,1]
+          self.clicked_cell = True
+          self.selected_cell.overlay_col = [0,0,1,1] ## sets to blue (clicked)
 
         ypos += 1
       xpos += 1
@@ -124,7 +134,9 @@ class Game(Widget):
       ypos = 0
       for item in row:
         if not item:
-          pass ## do things ##
+          pass
 
+        else:
+          pass
         ypos += 1
       xpos += 1
