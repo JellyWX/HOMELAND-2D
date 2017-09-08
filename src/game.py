@@ -133,7 +133,7 @@ class Game(Widget):
     for row in self.towers:
       ypos = 0
       for item in row:
-        if not item:
+        if item: ## if theres not a tower there
           pass
 
         else:

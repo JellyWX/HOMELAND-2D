@@ -19,6 +19,8 @@ class Grid(Widget):
 
   shade = Li([1,1,1,1])
 
+  tower = None
+
   def __init__(self,access=0,*args,**kwargs):
     super(Grid,self).__init__(*args,**kwargs)
     self.rotation = choice((0,90,180))
@@ -57,3 +59,7 @@ class Grid(Widget):
       self.buildable = False
       self.travellable = False
       self.src = ASSETS + 'Grid/hole.png'
+
+  def build(self):
+    self.travellable = False
+    self.buildable = False

@@ -1,0 +1,26 @@
+{
+  "gatling":
+  {
+    "target": [0,1],
+    "damage": 5,
+    "speed": 0.15,
+    "range": 2.5,
+    "splash": 0
+  },
+  "pulse":
+  {
+    "target": [0],
+    "damage": 8,
+    "speed": 0.1,
+    "range": 2,
+    "splash": 0
+  },
+  "rocket":
+  {
+    "target": [1],
+    "damage": 15,
+    "speed": 2,
+    "range": 4,
+    "splash": 1
+  }
+}
