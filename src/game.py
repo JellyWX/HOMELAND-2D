@@ -104,7 +104,7 @@ class Game(Widget):
             if self.clicked_cell: ## if this is the first cell covered when the user presses the mouse out of selected mode:
 
               if self.selected_cell == item:
-                print('now you should build a tower before you lose your fucking mind')
+                item.build('gatling')
 
               self.clicked_cell = False
 

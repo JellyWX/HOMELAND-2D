@@ -1,6 +1,8 @@
 {
   "gatling":
   {
+    "name": "gatling",
+    
     "target": [0,1],
     "damage": 5,
     "speed": 0.15,
@@ -9,6 +11,8 @@
   },
   "pulse":
   {
+    "name": "pulse",
+
     "target": [0],
     "damage": 8,
     "speed": 0.1,
@@ -17,6 +21,8 @@
   },
   "rocket":
   {
+    "name": "rocket",
+
     "target": [1],
     "damage": 15,
     "speed": 2,

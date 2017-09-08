@@ -33,27 +33,19 @@
       size: self.size
       source: self.overlay
 
-<Tower>:
-  size: self.size
-  pos: self.pos
-
-  canvas.before:
-    PushMatrix
     Color:
       rgba: 1,1,1,1
     Rectangle:
       pos: self.pos
       size: self.size
-      source: self.turret
-  canvas.after:
-    PopMatrix
+      source: self.tower_parts['base']
 
-  Color:
-    rgba: 1,1,1,1
-  Rectangle:
-    pos: self.pos
-    size: self.size
-    source: self.base
+    Color:
+      rgba: 1,1,1,1
+    Rectangle:
+      pos: self.pos
+      size: self.size
+      source: self.tower_parts['turret']
 
 <Game>:
   bg: bg

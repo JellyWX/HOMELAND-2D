@@ -21,6 +21,11 @@ class Grid(Widget):
 
   tower = None
 
+  tower_parts = {
+    base: Str(ASSETS + 'placeholder/invisible.png',)
+    turret: Str(ASSETS + 'placeholder/invisible.png')
+  }
+
   def __init__(self,access=0,*args,**kwargs):
     super(Grid,self).__init__(*args,**kwargs)
     self.rotation = choice((0,90,180))
@@ -60,6 +65,10 @@ class Grid(Widget):
       self.travellable = False
       self.src = ASSETS + 'Grid/hole.png'
 
-  def build(self):
+  def build(self,tower):
     self.travellable = False
     self.buildable = False
+
+    self.tower = tower
+    self.tower_parts['base'] = ASSETS + 'Tower/base.png'
+    self.tower_parts['turret'] = ASSETS + 'Tower/' + tower['name'] + '/turret.png'
