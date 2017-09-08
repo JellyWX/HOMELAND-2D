@@ -1,6 +1,7 @@
 from grid import Grid
-from locations import LEVELS
+from locations import LEVELS, ASSETS
 
+import json
 
 class Level(object):
 
@@ -11,6 +12,9 @@ class Level(object):
     self.map = []
     self.entry = []
     self.exit = []
+
+    with open(ASSETS + 'Tower/towers.json') as f:
+      towers = json.load(f)
 
     with open(LEVELS + level + '/data','r') as f:
       for l in f:
