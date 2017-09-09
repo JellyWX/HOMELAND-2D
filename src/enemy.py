@@ -1,5 +1,6 @@
 from kivy.uix.widget import Widget
 from kivy.properties import StringProperty as Str
+from kivy.clock import Clock
 
 from random import shuffle
 
@@ -24,6 +25,11 @@ class Enemy(Widget):
     self.level = level
 
     self.tile = level.getEntry()
+
+    Clock.schedule_interval(self.update,1.0/10.0)
+
+  def update(self):
+    #self.tile = tile
 
   def getRoute(self):
 

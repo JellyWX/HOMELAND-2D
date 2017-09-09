@@ -70,6 +70,8 @@ class Grid(Widget):
       self.travellable = False
       self.src = ASSETS + 'Grid/hole.png'
 
+    Clock.schedule_interval(self.update,1.0/10.0)
+
   def build(self,tower):
     self.travellable = False
     self.buildable = False
