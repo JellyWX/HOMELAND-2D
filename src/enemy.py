@@ -10,6 +10,8 @@ class Enemy(Widget):
 
   name = 'DEFAULT'
   grid = []
+  tile = (0,0)
+
   route = []
   route_t = []
 
@@ -21,6 +23,8 @@ class Enemy(Widget):
 
     self.src = ASSETS + 'enemy/' + self.name + '.png'
     self.level = level
+
+    self.tile = level.getEntry()
 
   def getRoute(self):
 
@@ -64,7 +68,7 @@ class Enemy(Widget):
 
     def _getRoute():
       path_map = _genLee(self.level.getExit())
-      entry = self.level.getEntry()
+      entry = self.tile
       route = [entry]
 
       if path_map[entry[0]][entry[1]] == None:

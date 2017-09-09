@@ -97,7 +97,7 @@ class Game(Widget):
         item.x = self.bg.x + self.bg.width/self.grid_size[0] * xpos
         item.y = self.bg.y + self.bg.height/self.grid_size[1] * ypos
         item.size = self.bg.width/self.grid_size[0],self.bg.height/self.grid_size[1]
-        
+
         if item in self.enemy.route_t:
           item.shade = [0,1,0,1]
         else:
@@ -109,11 +109,14 @@ class Game(Widget):
             if self.clicked_cell: ## if this is the first cell covered when the user presses the mouse out of selected mode:
 
               if self.selected_cell == item:
-                item.build(self.level.towers['gatling'])
-                try:
-                  self.enemy.getRoute()
-                except:
+                if self.selected_cell.tower != None:
                   item.clear()
+                else:
+                  item.build(self.level.towers['gatling'])
+                  try:
+                    self.enemy.getRoute()
+                  except:
+                    item.clear()
 
               self.clicked_cell = False
 
