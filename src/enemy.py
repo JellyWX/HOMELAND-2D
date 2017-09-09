@@ -10,8 +10,8 @@ class Enemy(Widget):
 
   name = 'DEFAULT'
   grid = []
-  routes = [[(0,0)]]
   route = []
+  route_t = []
 
   src = Str(ASSETS + 'enemy/' + name + '.png')
 
@@ -75,5 +75,8 @@ class Enemy(Widget):
       return route
 
     self.route = _getRoute()
+
+    self.route_t = []
+
     for i,j in self.route:
-      self.level.map[i][j].shade = [0,1,0,1]
+      self.route_t.append(self.level.map[i][j])

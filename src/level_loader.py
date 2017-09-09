@@ -14,7 +14,7 @@ class Level(object):
     self.exit = []
 
     with open(ASSETS + 'Tower/towers.json') as f:
-      towers = json.load(f)
+      self.towers = json.load(f)
 
     with open(LEVELS + level + '/data','r') as f:
       for l in f:

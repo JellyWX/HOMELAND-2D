@@ -21,10 +21,8 @@ class Grid(Widget):
 
   tower = None
 
-  tower_parts = {
-    base: Str(ASSETS + 'placeholder/invisible.png',)
-    turret: Str(ASSETS + 'placeholder/invisible.png')
-  }
+  tower_base = Str(ASSETS + 'placeholder/invisible.png')
+  tower_turret = Str(ASSETS + 'placeholder/invisible.png')
 
   def __init__(self,access=0,*args,**kwargs):
     super(Grid,self).__init__(*args,**kwargs)
@@ -70,5 +68,26 @@ class Grid(Widget):
     self.buildable = False
 
     self.tower = tower
-    self.tower_parts['base'] = ASSETS + 'Tower/base.png'
-    self.tower_parts['turret'] = ASSETS + 'Tower/' + tower['name'] + '/turret.png'
+    self.tower_base = ASSETS + 'Tower/base.png'
+    self.tower_turret = ASSETS + 'Tower/' + tower['name'] + '/turret.png'
+
+  def clear(self):
+    self.tower = None
+    self.tower_base = ASSETS + 'placeholder/invisible.png'
+    self.tower_turret = ASSETS + 'placeholder/invisible.png'
+
+    if self.access == 0:
+      self.buildable = True
+      self.travellable = True
+
+    elif self.access in [1, 4, 5]:
+      self.buildable = False
+      self.travellable = True
+
+    elif self.access == 2:
+      self.buildable = True
+      self.travellable = False
+
+    elif self.access == 3:
+      self.buildable = False
+      self.travellable = False
