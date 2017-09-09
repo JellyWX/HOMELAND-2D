@@ -23,10 +23,6 @@ class Game(Widget):
 
   started = 1
 
-  waves = []
-  towers = []
-  monsters = []
-
   grid_size = (24.0,15.0)
 
   ## rendering stuff ##

@@ -13,6 +13,11 @@ class Level(object):
     self.entry = []
     self.exit = []
 
+    self.waves = []
+
+    with open(ASSETS + 'Enemy/enemies.json') as f:
+      self.enemies = json.load(f)
+
     with open(ASSETS + 'Tower/towers.json') as f:
       self.towers = json.load(f)
 
@@ -60,6 +65,8 @@ class Level(object):
 
       self.size = float(len(self.map)), float(len(self.map[0]))
       print(self.size)
+
+    self.waves = [['blob' for _ in range(6)]]
 
   def getExit(self):
     for row in range(len(self.map)):

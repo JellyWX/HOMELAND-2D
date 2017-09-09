@@ -9,7 +9,6 @@ from locations import ASSETS
 class Enemy(Widget):
 
   name = 'DEFAULT'
-  grid = []
   tile = (0,0)
 
   route = []

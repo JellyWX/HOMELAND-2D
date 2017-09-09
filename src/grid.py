@@ -21,6 +21,13 @@ class Grid(Widget):
 
   tower = None
 
+  #tower_parts_d = {
+  #  'base' : Str(ASSETS + 'placeholder/invisible.png'),
+  #  'turret' : Str(ASSETS + 'placeholder/invisible.png')
+  #}
+
+  #tower_parts = type('towerparts', (object,), tower_parts_d)
+
   tower_base = Str(ASSETS + 'placeholder/invisible.png')
   tower_turret = Str(ASSETS + 'placeholder/invisible.png')
 

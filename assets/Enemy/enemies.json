@@ -1,0 +1,10 @@
+{
+  "blob":
+  {
+    "name": "blob",
+
+    "type": 0,
+    "speed": 0.5,
+    "health": 15
+  }
+}
