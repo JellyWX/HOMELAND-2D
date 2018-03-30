@@ -1,5 +1,6 @@
 from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty as Num, StringProperty as Str, ListProperty as Li
+from kivy.clock import Clock
 
 from random import choice
 
@@ -71,6 +72,9 @@ class Grid(Widget):
       self.src = ASSETS + 'Grid/hole.png'
 
     Clock.schedule_interval(self.update,1.0/10.0)
+
+  def update(self, t):
+    pass
 
   def build(self,tower):
     self.travellable = False

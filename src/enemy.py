@@ -30,6 +30,7 @@ class Enemy(Widget):
 
   def update(self):
     #self.tile = tile
+    pass
 
   def getRoute(self):
 
@@ -37,7 +38,7 @@ class Enemy(Widget):
     def _genLee(start):
 
       travellable = [[i.travellable for i in row] for row in self.level.map]
-      size = map(int,self.level.size)
+      size = list(map(int,self.level.size))
 
       n_offsets = [(1,0), (-1,0), (0,1), (0,-1)]
       score = 0
