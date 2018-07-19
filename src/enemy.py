@@ -17,8 +17,8 @@ class Enemy(Widget):
 
   src = Str(ASSETS + 'enemy/' + name + '.png')
 
-  def __init__(self,name,level,*args,**kwargs):
-    super(Enemy,self).__init__(*args,**kwargs)
+  def __init__(self, name, level, *args, **kwargs):
+    super(Enemy, self).__init__(*args, **kwargs)
     self.name = name
 
     self.src = ASSETS + 'enemy/' + self.name + '.png'
@@ -26,9 +26,9 @@ class Enemy(Widget):
 
     self.tile = level.getEntry()
 
-    Clock.schedule_interval(self.update,1.0/10.0)
+    Clock.schedule_interval(self.update, 1.0/10.0)
 
-  def update(self):
+  def update(self, t):
     #self.tile = tile
     pass
 

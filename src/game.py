@@ -105,9 +105,9 @@ class Game(Widget):
             if self.clicked_cell: ## if this is the first cell covered when the user presses the mouse out of selected mode:
 
               if self.selected_cell == item:
-                if self.selected_cell.tower != None:
+                if self.selected_cell.tower is not None:
                   item.clear()
-                else:
+                elif self.selected_cell.buildable:
                   item.build(self.level.towers['gatling'])
                   try:
                     self.enemy.getRoute()
