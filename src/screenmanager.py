@@ -3,4 +3,4 @@ from kivy.properties import ObjectProperty
 
 
 class Manager(ScreenManager):
-  game = ObjectProperty(None)
+    game = ObjectProperty(None)
